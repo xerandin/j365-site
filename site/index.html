@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>J365 Consulting</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
@@ -123,6 +124,8 @@
       </select>
       <textarea name="message" rows="5" placeholder="Anything else we should know?" required></textarea>
       <label><input type="checkbox" name="smsConsent"> I authorize J365 Consulting to send text messages to the number provided.</label>
+      <div class="g-recaptcha" data-sitekey="6Lf6yG4rAAAAAMwKcdmG_G7KFp8KsUI9tUZsHH_N"></div>
+
       <button type="submit">Send Message</button>
     </form>
   </section>
