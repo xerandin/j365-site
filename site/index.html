@@ -51,6 +51,34 @@
       text-decoration: none;
       border-radius: 4px;
     }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    input, textarea, select {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 12px;
+      background: #0f3b66;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #1c6876;
+    }
+    label {
+      font-size: 0.95rem;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -62,7 +90,7 @@
 
   <section>
     <h2>About</h2>
-    <p>J365 Consulting helps small and midsize organizations unlock the full potential of Microsoft 365. Led by a multi-disciplinary Microsoft expert with nearly 20 years of experience — including a direct role with Microsoft during the advent of Microsoft Copilot — our mission is to realize the full value of Microsoft 365 and reduce the overall cost of your tech stack, improve compliance, and solve real business problems through your existing investments.</p>
+    <p>J365 Consulting helps small and midsize organizations unlock the full potential of Microsoft 365. Led by a multi-disciplinary Microsoft expert with nearly 20 years of experience — including a direct role with Microsoft during the advent of Microsoft Copilot — our mission is to realize the full value of Microsoft 365 and reduce the overall cost of your tech stack, modernizing your business by using what you already own before building or buying anything else.</p>
   </section>
 
   <section>
@@ -71,20 +99,58 @@
       <li>Microsoft 365 Optimization & Administration</li>
       <li>Virtual CIO (vCIO) Services</li>
       <li>Compliance & Data Governance Strategy</li>
-      <li>Cloud Voice (Teams Phone + CRM, CCaaS, and Compliance Call Recording integrations)</li>
+      <li>Cloud Voice (Teams Phone, CCaaS integrations)</li>
       <li>Legal & Nonprofit Sector IT Consulting</li>
     </ul>
   </section>
 
   <section>
     <h2>Contact</h2>
-    <p>Let’s talk about how J365 Consulting can support your organization. Reach out via email:</p>
-    <p><a href="mailto:inquiries@j365consulting.com">inquiries@j365consulting.com</a></p>
-    <a href="mailto:inquiries@j365consulting.com" class="cta">Get in Touch</a>
+    <p>Let’s talk about how J365 Consulting can support your organization. Complete the form below and we’ll be in touch.</p>
+    <form id="contact-form" method="POST" action="https://j365-contactform.azurewebsites.net/api/contactform">
+      <input type="text" name="fullName" placeholder="Full Name" required>
+      <input type="text" name="contact" placeholder="Email or Textable Phone" required>
+      <input type="text" name="company" placeholder="Company Name">
+      <select name="priority" required>
+        <option value="" disabled selected>What is your highest priority?</option>
+        <option value="Technology cost optimization">Technology cost optimization</option>
+        <option value="Generative AI">Generative AI</option>
+        <option value="Security">Security</option>
+        <option value="Data Governance">Data Governance</option>
+        <option value="Automation">Automation</option>
+        <option value="M365 Optimization">M365 Optimization</option>
+        <option value="Teams Phone">Teams Phone</option>
+      </select>
+      <textarea name="message" rows="5" placeholder="Anything else we should know?" required></textarea>
+      <label><input type="checkbox" name="smsConsent"> I authorize J365 Consulting to send text messages to the number provided.</label>
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 
   <footer>
     <p>&copy; 2025 J365 Consulting. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const contactField = document.querySelector('input[name="contact"]');
+      const smsConsentCheckbox = document.querySelector('input[name="smsConsent"]');
+
+      function validateContactInput() {
+        const value = contactField.value.trim();
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (isEmail) {
+          smsConsentCheckbox.checked = false;
+          smsConsentCheckbox.disabled = true;
+          smsConsentCheckbox.parentElement.style.color = "#888"; // gray out label
+        } else {
+          smsConsentCheckbox.disabled = false;
+          smsConsentCheckbox.parentElement.style.color = "#333"; // restore color
+        }
+      }
+
+      contactField.addEventListener("input", validateContactInput);
+    });
+  </script>
 </body>
 </html>
