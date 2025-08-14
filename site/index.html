@@ -8,24 +8,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
+    :root {
+      --j365-blue: #0f3b66;
+      --j365-teal: #1c6876;
+      --j365-gray: #919618;
+      --text: #000000;
+      --bg: #f7f7f7;
+      --white: #ffffff;
+    }
+
     body {
       font-family: 'Montserrat', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f7f7f7;
-      color: #000000;
+      background: var(--bg);
+      color: var(--text);
     }
+
+    /* Header / Topbar */
     header {
-      background: #0f3b66;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+      background: var(--j365-blue);
+      color: var(--white);
+      padding: 20px;
+    }
+    .topbar {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
     }
     header img {
-      height: 160px;
+      height: 56px;
+      width: auto;
       display: block;
-      margin: 0 auto 20px;
+      margin: 0; /* moved from centered to inline */
     }
+    .brand h1 {
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover,
+    nav a:focus {
+      text-decoration: underline;
+    }
+
+    /* Tagline row maintains the banner look you had */
+    .tagline {
+      max-width: 1100px;
+      margin: 12px auto 0;
+      padding: 12px 0 8px;
+      text-align: left; /* still reads like a banner but aligned with brand */
+      opacity: 0.95;
+    }
+
     section {
       padding: 40px 20px;
       max-width: 900px;
@@ -35,25 +95,25 @@
       margin-top: 0;
     }
     footer {
-      background: #1c6876;
-      color: white;
+      background: var(--j365-teal);
+      color: var(--white);
       text-align: center;
       padding: 20px;
     }
     footer a {
-      color: white;
+      color: var(--white);
       text-decoration: underline;
     }
     a {
-      color: #1c6876;
+      color: var(--j365-teal);
       text-decoration: none;
     }
     .cta {
       display: inline-block;
       margin-top: 20px;
       padding: 12px 24px;
-      background: #919618;
-      color: white;
+      background: var(--j365-gray);
+      color: var(--white);
       text-decoration: none;
       border-radius: 4px;
     }
@@ -73,15 +133,15 @@
     }
     button {
       padding: 12px;
-      background: #0f3b66;
-      color: white;
+      background: var(--j365-blue);
+      color: var(--white);
       border: none;
       border-radius: 4px;
       cursor: pointer;
       font-weight: 600;
     }
     button:hover {
-      background: #1c6876;
+      background: var(--j365-teal);
     }
     label {
       font-size: 0.95rem;
@@ -91,13 +151,46 @@
       margin-top: 10px;
       font-weight: 600;
     }
+
+    /* Simple responsive tweaks */
+    @media (max-width: 720px) {
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .brand {
+        justify-content: flex-start;
+      }
+      nav ul {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+      .tagline {
+        text-align: left;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="assets/j365-logo.svg" alt="J365 Consulting logo"/>
-    <h1>J365 Consulting</h1>
-    <p>Microsoft 365 Expertise. Enterprise Strategy. Small Business Fit.</p>
+    <div class="topbar" role="navigation" aria-label="Primary">
+      <div class="brand">
+        <a href="/" aria-label="J365 Consulting Home">
+          <img src="assets/j365-logo.svg" alt="J365 Consulting logo"/>
+        </a>
+        <h1>J365 Consulting</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#consultants">Consultants</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="tagline">
+      <p>Microsoft 365 Expertise. Enterprise Strategy. Small Business Fit.</p>
+    </div>
   </header>
 
   <section>
@@ -105,18 +198,32 @@
     <p>J365 Consulting helps small and midsize businesses modernize their operations through strategic technology leadership. We optimize Microsoft 365, right-size licensing, negotiate contracts, and implement practical AI solutions tailored to your business. Our approach always starts with the tools you already own.</p>
   </section>
 
-  <section>
+  <!-- NEW: Consultants placeholder (anchors match the new nav) -->
+  <section id="consultants">
+    <h2>Consultants</h2>
+    <p><em>Placeholder:</em> Introduce your team, roles, certifications, and focus areas. You can expand this into individual profile pages later or keep it summarized here.</p>
+    <ul>
+      <li><strong>Jason Waite</strong> — President, vCIO and Microsoft 365 strategist.</li>
+      <li><strong>Amy Jane Waite</strong> — Vice President, operations and client success.</li>
+    </ul>
+    <a class="cta" href="#contact">Start a conversation</a>
+  </section>
+
+  <!-- Existing Services section preserved; added id for nav target -->
+  <section id="services">
     <h2>Services</h2>
     <ul>
-      <li>Microsoft 365 Optimization & Administration</li>
-      <li>Virtual CIO (vCIO) Services</li>
-      <li>Compliance & Data Governance Strategy</li>
+      <li>Microsoft 365 Optimization &amp; Administration</li>
+      <li>Fractional CIO/CTO Services</li>
+      <li>Compliance &amp; Data Governance Strategy</li>
       <li>Cloud Voice (Teams Phone, CCaaS integrations)</li>
-      <li>Legal & Nonprofit Sector IT Consulting</li>
+      <li>Emphasized verticals: Healthcare &amp; Manufacturing</li>
+      <li>Key verticals: Legal &amp; Nonprofit</li>
     </ul>
   </section>
 
-  <section>
+  <!-- Existing Contact section preserved; added id for nav target -->
+  <section id="contact">
     <h2>Contact</h2>
     <p>Let’s talk about how J365 Consulting can support your organization. Complete the form below and we’ll be in touch.</p>
     <form id="contact-form" method="POST">
@@ -144,9 +251,10 @@
 
   <footer>
     <p>&copy; 2025 J365 Consulting. All rights reserved.</p>
-    <p><a href="tel:+14693829853">+1 (469) 382-9853</a> | <a href="mailto:inquiries@j365consulting.com">inquiries@j365consulting.com</a></p>
+    <p><a href="tel:+14693829853">+1 (469) 382-9853</a> | <a href="/cdn-cgi/l/email-protection#0a63647b7f6378636f794a60393c3f696564797f667e63646d24696567"><span class="__cf_email__" data-cfemail="abc2c5dadec2d9c2ced8ebc1989d9ec8c4c5d8dec7dfc2c5cc85c8c4c6">[email&#160;protected]</span></a></p>
   </footer>
 
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("contact-form");
@@ -156,7 +264,7 @@
 
       function validateContactInput() {
         const value = contactField.value.trim();
-        const isEmail = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value);
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         if (isEmail) {
           smsConsentCheckbox.checked = false;
           smsConsentCheckbox.disabled = true;
@@ -185,7 +293,7 @@
             messageBox.textContent = "✅ Message sent successfully!";
             messageBox.style.color = "green";
             form.reset();
-            grecaptcha.reset();
+            if (window.grecaptcha) grecaptcha.reset();
           } else {
             const errorText = await response.text();
             messageBox.textContent = "⚠️ Failed to send message: " + errorText;
