@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Waite;Jason;;;
+FN:Jason Waite
+ORG:J365 Consulting LLC
+TITLE:President
+TEL;TYPE=WORK,VOICE:+1-972-465-9181
+EMAIL;TYPE=PREF,INTERNET:jason@j365consulting.com
+URL:https://j365consulting.com
+ADR;TYPE=WORK:;;270 N. Denton Tap Rd. Suite 100;Coppell;TX;75019;USA
+END:VCARD
